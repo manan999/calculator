@@ -1,0 +1,20 @@
+@font-face
+{
+	font-family: 'digital' ;
+	font-weight: normal ;
+	font-style: normal ;
+	src : url('./DS-Digital.woff') format('woff') ;
+}
+
+.scr
+{
+	box-shadow: -1px -1px 2px 2px rgba(0,0,0,0.4) inset;
+	background-color: #bdc96c ;
+	color : black ;
+	text-align: right ;
+	font-size : 2.5rem ;
+	font-family: 'digital' ;
+	padding-right: 0.1em ;
+	min-height: 1.2em;
+	line-height: 1.2em ;
+}

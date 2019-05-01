@@ -1,0 +1,37 @@
+.btn-con
+{	margin : 0.8em 0.5em;
+	display: flex ;
+	justify-content: space-between;
+}
+
+.button
+{
+	background-color: rgba(255, 107, 36, 0.95) ;
+	border : none ;
+	color : white ;
+	font-weight: bold ;
+	border-radius: 0.3em ;
+	min-width : 2.8em ;
+	min-height : 1.75em ;
+	font-size : 1.05rem ;
+	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
+	padding: 0;
+	transition: all 0.75s ; 
+}
+
+.button:focus
+{
+	background-color: orangered ;
+	outline: 0;
+}
+
+.curved
+{
+	border-radius : 0.6rem ;
+	min-height : 1.1em ;
+}
+
+#C
+{
+	background-color: #9b031c ;
+}
