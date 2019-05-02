@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import math from 'mathjs' ;
 
 import './calculator.css' ;
 import Screen from './Screen/Screen.js' ;
@@ -8,16 +9,60 @@ class Calculator extends Component {
 	constructor()
 	{	super() ;
 		this.str = '' ;
+		this.disp = '' ;
 		this.state = {
 			text  : '0' ,
 			owner : 'Manan' ,
+			last  : 'start' ,
 		}
 	}
 
+	parseEqual = () => {
+		// let txt = text ;
+		let txt = this.str ;
+		txt = math.eval(txt) ;
+		this.setState({text : (txt+'').slice(0, 10), last: 'answer'});
+		console.log(txt) ;
+	}
+
 	onBtnClick = (char) => {
-		const txt = this.state.text ;
-		this.str = (txt === '0' ? char : txt + char)
-		this.setState({text : this.str});
+		const {last, text} = this.state ;
+		const txt = text ;
+		let test = '+-^x' + String.fromCharCode(247) ;
+		if(char === 'C')
+		{	this.setState({text : '0', last: 'start'});
+		}
+		else if(char === '=')
+		{	this.parseEqual() ;
+		}
+		else if(char === String.fromCharCode(8676) )
+		{
+			this.str = this.str.slice(0, this.str.length -1) ;
+			this.disp = this.disp.slice(0, this.disp.length -1) ;
+			this.setState({text: text.slice(0, text.length -1)});
+		}
+		else if( test.includes(char) )
+		{	
+			if(last !== 'op' )
+			{
+				this.disp = txt + char ;
+				this.str = this.disp.replace(/x/g, '*') ;
+				this.str = this.str.replace(new RegExp(''+String.fromCharCode(247), 'g'), '/') ;
+				this.str = this.str.replace(new RegExp(''+String.fromCharCode(183), 'g'), '.') ;
+				this.setState({text : this.disp.slice(-10), last : 'op'});
+			}
+			else
+			{	//Write
+			}
+		}
+		else
+		{	this.disp = ((last === 'answer' || last === 'start') ? char : txt + char) ;
+			this.str = this.disp.replace(/x/g, '*') ;
+			this.str = this.str.replace(new RegExp(''+String.fromCharCode(247), 'g'), '/') ;
+			this.str = this.str.replace(new RegExp(''+String.fromCharCode(183), 'g'), '.') ;
+			this.setState({text : this.disp.slice(-10), last:'number'});
+			// console.log(this.str, this.disp) ;
+		}
 	} 
 
 	render() {
